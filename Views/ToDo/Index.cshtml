@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using WebApplication2.Models;
+@{
+}
+@model List<Todoitem>
+
+<h1>To-Do List</h1>
+
+<form method="post" action="@Url.Action("Add")">
+    <input type="text" name="newItem" />
+    <input type="submit" value="Additem" />
+</form>
+
+
+    @foreach (var todo in Model)
+    {
+        <div>
+            <input type="checkbox" name="isComplete"
+                value="@todo.Id" @(todo.IsDone ? "checked" : "")/>
+            <span>@todo.Name</span>
+        </div>
+    }
+
+
+
+    @if (Model.Any())
+    {
+        <form method="post" action="@Url.Action("DeleteAll")" style="margin-top: 25px;">
+
+            <input type="submit" value="Delete" />
+
+        </form>
+    }
